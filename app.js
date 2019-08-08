@@ -7,9 +7,17 @@ function Book (title, author, pages, read){
     this.read = read;
 }
 
+function isDuplicated(hole,part){
+    return hole.some((e)=>e.title==part.title && e.author ==part.author && e.pages == part.pages && e.read == part.read)
+}
+
 function addBookToLibrary (e){
     const {title,author,pages,read} = getInput();
     let newBook = new Book(title,author,pages,read);
+    if (isDuplicated(myLibrary,newBook)) {
+        alert(" book already exists");
+        return;
+    }
     //console.log(newBook);
     myLibrary.push(newBook);
     //console.log(myLibrary);
@@ -35,15 +43,14 @@ function refresh(){
     return myLibrary.forEach(function (book, i){
         const {title, author, pages, read} = book;
         let box = document.querySelector(".library");
-        let html = `<div class ="book"><span class="title"> ${title} </span> <span class="author"> ${author} </span> <span class="pages"> ${pages} </span> <span class="read"> ${read} </div>`;
+        let html = `<div class ="book"><span class="title"> ${title} </span> <span class="author"> ${author} </span> <span class="pages"> ${pages} </span> <span class="read"> ${read}</span><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button> </div>`;
         box.insertAdjacentHTML('beforeend', html);
     })
+}
 
-    // let html = '';
-    // myLibrary.forEach((item)=>{
-    //     html += `<span>${item.title}|${item.author}|${item.pages}|${item.read}</span>`
-    // })
-    // lib.insertAdjacentHTML("beforeend", html);
+function removeBook(index){
+    myLibrary.splice(index,1);
+    refresh();
 }
 
 document.querySelector('.add_to_library').addEventListener('click', addBookToLibrary)
