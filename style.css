@@ -23,3 +23,28 @@
 .readed {
     background-color: rgb(12, 50, 163);
 }
+
+.add_book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    background-color: aquamarine;
+    border-radius: 10px;
+}
+
+.click_to_add,
+.add_to_library {
+    height: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: blueviolet;
+    box-shadow: 5px 5px 5px 0px rgb(94, 92, 92);
+}
+
+.add_title,
+.add_author,
+.add_pages {
+    height: 35px;
+    border-radius: 8px;   
+}

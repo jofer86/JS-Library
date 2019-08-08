@@ -11,16 +11,14 @@ function isDuplicated(hole,part){
     return hole.some((e)=>e.title==part.title && e.author ==part.author && e.pages == part.pages && e.read == part.read)
 }
 
-function addBookToLibrary (e){
-    const {title,author,pages,read} = getInput();
-    let newBook = new Book(title,author,pages,read);
+function addBookToLibrary (){
+    const {title,author,pages} = getInput();
+    let newBook = new Book(title,author,pages);
     if (isDuplicated(myLibrary,newBook)) {
         alert(" book already exists");
         return;
-    }
-    //console.log(newBook);
-    myLibrary.push(newBook);
-    //console.log(myLibrary);
+    }  
+    myLibrary.push(newBook);    
     refresh();
 }
 
@@ -28,9 +26,7 @@ function getInput(){
     let title = document.querySelector(".add_title").value;
     let author = document.querySelector(".add_author").value;
     let pages = document.querySelector(".add_pages").value;
-    let read = document.querySelector(".RStatus").value;
-    //console.log(read)
-    return {"title": title,"author": author,"pages":pages,"read": read}
+    return {"title": title,"author": author,"pages":pages}
 }
 
 function getDOM(){
@@ -84,11 +80,10 @@ function changeStatus(index){
 }
 
 function Appear(){
-    const {title, author, pages, read, click,add} = getDOM();
+    const {title, author, pages, click,add} = getDOM();
     title.classList.add('appear');
     author.classList.add('appear');
     pages.classList.add('appear');
-    read.classList.add('appear');    
     click.classList.add('dissapear');
     add.classList.add('appear');
 }
