@@ -55,7 +55,7 @@ function refresh(){
         let box = document.querySelector(".library");
         let status = (read == "1" ? "Read" : "Not Read")
         
-    let html = `<div class ="book"><span class="title"> ${title} </span> <span class="author"> ${author} </span> <span class="pages"> ${pages} </span> <button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div>`;
+    let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div></div>`;
         box.insertAdjacentHTML('beforeend', html);
     })
 }
