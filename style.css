@@ -14,3 +14,12 @@
 .dissapear {
     display: none;
 }
+
+.statusBtn {
+    margin-left: .5rem;
+    transition: all .5s ease-in;
+}
+
+.readed {
+    background-color: rgb(12, 50, 163);
+}

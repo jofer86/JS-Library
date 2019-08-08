@@ -42,8 +42,8 @@ function getDOM(){
         click: document.querySelector('.click_to_add'),
         removeBtn: document.querySelector('.removeBtn'),
         inputs: document.querySelector('.inputs'),
-        add: document.querySelector('.add_to_library')
-
+        add: document.querySelector('.add_to_library'),
+        statusBtn: document.querySelector('.statusBtn')
     }
 }
 
@@ -57,13 +57,29 @@ function refresh(){
     return myLibrary.forEach(function (book, i){
         const {title, author, pages, read} = book;
         let box = document.querySelector(".library");
-        let html = `<div class ="book"><span class="title"> ${title} </span> <span class="author"> ${author} </span> <span class="pages"> ${pages} </span> <span class="read"> ${read}</span><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button> </div>`;
+        let status = (read == "1" ? "Read" : "Not Read")
+        
+    let html = `<div class ="book"><span class="title"> ${title} </span> <span class="author"> ${author} </span> <span class="pages"> ${pages} </span> <button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div>`;
         box.insertAdjacentHTML('beforeend', html);
     })
 }
 
 function removeBook(index){
     myLibrary.splice(index, 1);
+    refresh();
+}
+
+function changeStatus(index){
+    let chng = document.getElementsByClassName("statusBtn")[0]; 
+    if (myLibrary[index].read == 2){
+        myLibrary[index].read = 1;
+        chng.classList.add('readed');
+    } else {
+        myLibrary[index].read = 2;
+        chng.classList.remove('readed')
+    }
+    //console.log(myLibrary[index]);
+    
     refresh();
 }
 
