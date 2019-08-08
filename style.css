@@ -1,0 +1,16 @@
+.add_title,
+.add_author,
+.add_pages,
+.add_read,
+.RStatus, 
+.add_to_library{
+    display: none;
+}
+
+.appear{
+    display: inline-block;
+}
+
+.dissapear {
+    display: none;
+}

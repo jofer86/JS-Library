@@ -28,9 +28,23 @@ function getInput(){
     let title = document.querySelector(".add_title").value;
     let author = document.querySelector(".add_author").value;
     let pages = document.querySelector(".add_pages").value;
-    let read = document.querySelector("#RStatus").value;
+    let read = document.querySelector(".RStatus").value;
     //console.log(read)
     return {"title": title,"author": author,"pages":pages,"read": read}
+}
+
+function getDOM(){
+    return {
+        title: document.querySelector('.add_title'),
+        author: document.querySelector('.add_author'),
+        pages: document.querySelector('.add_pages'),
+        read: document.querySelector('.RStatus'),
+        click: document.querySelector('.click_to_add'),
+        removeBtn: document.querySelector('.removeBtn'),
+        inputs: document.querySelector('.inputs'),
+        add: document.querySelector('.add_to_library')
+
+    }
 }
 
 function refresh(){
@@ -49,8 +63,19 @@ function refresh(){
 }
 
 function removeBook(index){
-    myLibrary.splice(index,1);
+    myLibrary.splice(index, 1);
     refresh();
 }
 
+function Appear(){
+    const {title, author, pages, read, click,add} = getDOM();
+    title.classList.add('appear');
+    author.classList.add('appear');
+    pages.classList.add('appear');
+    read.classList.add('appear');    
+    click.classList.add('dissapear');
+    add.classList.add('appear');
+}
+
 document.querySelector('.add_to_library').addEventListener('click', addBookToLibrary)
+document.querySelector('.click_to_add').addEventListener('click', Appear)
