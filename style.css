@@ -56,7 +56,8 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
+    
 }
 
 .book {
@@ -68,6 +69,8 @@
     width: 30vw;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
+    
 }
 
 .book > div {
