@@ -26,12 +26,24 @@ function getInput(){
 }
 
 function refresh(){
-    let lib = document.querySelector(".library")
-    let html = '';
-    myLibrary.forEach((item)=>{
-        html += `<span>${item.title}|${item.author}|${item.pages}|${item.read}</span>`
+    let lib = document.querySelector(".library");
+    let main = document.querySelector(".main")
+    let libHTML = '<section class="library"></div>';
+    lib.remove();
+    main.insertAdjacentHTML('beforeend', libHTML);
+
+    return myLibrary.forEach(function (book, i){
+        const {title, author, pages, read} = book;
+        let box = document.querySelector(".library");
+        let html = `<div class ="book"><span class="title"> ${title} </span> <span class="author"> ${author} </span> <span class="pages"> ${pages} </span> <span class="read"> ${read} </div>`;
+        box.insertAdjacentHTML('beforeend', html);
     })
-    lib.insertAdjacentHTML("beforeend",html);
+
+    // let html = '';
+    // myLibrary.forEach((item)=>{
+    //     html += `<span>${item.title}|${item.author}|${item.pages}|${item.read}</span>`
+    // })
+    // lib.insertAdjacentHTML("beforeend", html);
 }
 
 document.querySelector('.add_to_library').addEventListener('click', addBookToLibrary)
