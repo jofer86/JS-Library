@@ -51,7 +51,6 @@
 
 .library {
     margin: .5rem 0;
-    border: 1px solid red;
     padding: 1rem;
     display: flex;
     flex-wrap: wrap;
@@ -98,4 +97,8 @@
 
 .not_read{
     background-color: red;
+}
+
+.removeBtn{
+    background-color: orangered;
 }

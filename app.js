@@ -1,5 +1,4 @@
 let myLibrary = [];
-let statusBtn = [[]]
 
 function Book (title, author, pages, read){
     this.title = title;
@@ -56,42 +55,37 @@ function refresh(){
         const {title, author, pages, read} = book;
         let box = document.querySelector(".library");
         let status = (read == "1" ? "Read" : "Not Read")
-        if (!statusBtn[i]){
-            if (status =="Read"){
-                statusBtn[i] = ["statusBtn read"]
-        
-            } else statusBtn[i] = ["statusBtn not_read"];
+        let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div></div>`;
+        box.insertAdjacentHTML('beforeend', html);
+        let chng = document.querySelectorAll(".statusBtn")[i];
+        if(chng.innerHTML == 'Read'){
+            chng.classList.add('read')
+        }else{
+        chng.classList.add('not_read')
         }
-    let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="${statusBtn[i].join(' ')}" onclick="changeStatus(${i})">${status}</button></div></div>`;
-    box.insertAdjacentHTML('beforeend', html);
-    
-    
-    
-
-    })
+})
 }
+
 
 function removeBook(index){
     myLibrary.splice(index, 1);
     refresh();
-}
-
+    }
+    
 function changeStatus(index){
-    let chng = document.querySelectorAll(".statusBtn")[index]; 
-       
+    let chng = document.querySelectorAll(".statusBtn")[index];     
+        
     if (myLibrary[index].read == "2"){
         myLibrary[index].read = "1";
-        statusBtn[index].pop()
-        statusBtn[index].push("read")
-        //chng.classList.add('read');
+        chng.classList.remove('not_read');
+        chng.classList.add('read');
+        chng.innerHTML = 'Read'
     } else {
         myLibrary[index].read = "2";
-        statusBtn[index].pop()
-        statusBtn[index].push("not_read")
-        
-    }
-    refresh()
-    
+        chng.classList.remove('read');
+        chng.classList.add('not_read');
+        chng.innerHTML = "Not Read"
+    }    
 }
 
 function Appear(){
@@ -108,5 +102,7 @@ function Appear(){
 
 document.querySelector('.add_to_library').addEventListener('click', addBookToLibrary);
 document.querySelector('.click_to_add').addEventListener('click', Appear);
+
+
 
 
