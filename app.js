@@ -58,7 +58,7 @@ function refresh(){
         
     let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div></div>`;
     box.insertAdjacentHTML('beforeend', html);
-    statusColor();
+  
     })
 }
 
@@ -68,13 +68,16 @@ function removeBook(index){
 }
 
 function changeStatus(index){
-    let chng = document.getElementsByClassName("statusBtn")[0]; 
+    let chng = document.querySelectorAll(".statusBtn")[index]; 
+    console.log(chng)
     if (myLibrary[index].read == 2){
         myLibrary[index].read = 1;
-        chng.classList.add('readed');
+        chng.classList.remove('not_read');
+        chng.classList.add('read');
     } else {
         myLibrary[index].read = 2;
-        chng.classList.remove('readed')
+        chng.classList.remove('read');
+        chng.classList.add('not_read')
     }
     refresh();
 }
@@ -89,15 +92,9 @@ function Appear(){
     read.classList.add('appear');
 }
 
-function statusColor(){
-    const {statusBtn} = getDOM();
-    if(statusBtn.value === "Read"){
-        statusBtn.classList.add('read');
-    }else if (statusBtn.value === "Not Read"){
-        statusBtn.classList.add('not_read')
-    }
-}
+
 
 document.querySelector('.add_to_library').addEventListener('click', addBookToLibrary);
 document.querySelector('.click_to_add').addEventListener('click', Appear);
-document.querySelector('.statusBtn').addEventListener('click', statusColor);
+
+
