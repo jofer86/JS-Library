@@ -1,4 +1,5 @@
 let myLibrary = [];
+let statusBtn = [[]]
 
 function Book (title, author, pages, read){
     this.title = title;
@@ -55,8 +56,13 @@ function refresh(){
         const {title, author, pages, read} = book;
         let box = document.querySelector(".library");
         let status = (read == "1" ? "Read" : "Not Read")
+        if (!statusBtn[i]){
+            if (status =="Read"){
+                statusBtn[i] = ["statusBtn read"]
         
-    let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div></div>`;
+            } else statusBtn[i] = ["statusBtn not_read"];
+        }
+    let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="${statusBtn[i].join(' ')}" onclick="changeStatus(${i})">${status}</button></div></div>`;
     box.insertAdjacentHTML('beforeend', html);
     
     
@@ -72,17 +78,19 @@ function removeBook(index){
 
 function changeStatus(index){
     let chng = document.querySelectorAll(".statusBtn")[index]; 
-        
+       
     if (myLibrary[index].read == "2"){
         myLibrary[index].read = "1";
-        chng.classList.remove('not_read');
-        chng.classList.add('read');
+        statusBtn[index].pop()
+        statusBtn[index].push("read")
+        //chng.classList.add('read');
     } else {
         myLibrary[index].read = "2";
-        chng.classList.remove('read');
-        chng.classList.add('not_read')
+        statusBtn[index].pop()
+        statusBtn[index].push("not_read")
+        
     }
-    
+    refresh()
     
 }
 
