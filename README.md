@@ -6,3 +6,6 @@
 This was done using DOM manipulation to construct the entire library.
 
 Link to Live Version [HERE](https://htmlpreview.github.io/?https://github.com/jofer86/JS-Library/blob/library/index.html).
+
+
+## Note to Reviewer, for some reason the Live Version is not displaying the proper working site, please do Clone the repo and run it locally.
