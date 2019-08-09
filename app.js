@@ -58,7 +58,10 @@ function refresh(){
         
     let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div></div>`;
     box.insertAdjacentHTML('beforeend', html);
-  
+    
+    
+    
+
     })
 }
 
@@ -69,17 +72,18 @@ function removeBook(index){
 
 function changeStatus(index){
     let chng = document.querySelectorAll(".statusBtn")[index]; 
-    console.log(chng)
-    if (myLibrary[index].read == 2){
-        myLibrary[index].read = 1;
+        
+    if (myLibrary[index].read == "2"){
+        myLibrary[index].read = "1";
         chng.classList.remove('not_read');
         chng.classList.add('read');
     } else {
-        myLibrary[index].read = 2;
+        myLibrary[index].read = "2";
         chng.classList.remove('read');
         chng.classList.add('not_read')
     }
-    refresh();
+    
+    
 }
 
 function Appear(){
