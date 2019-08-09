@@ -12,8 +12,8 @@ function isDuplicated(hole,part){
 }
 
 function addBookToLibrary (){
-    const {title,author,pages} = getInput();
-    let newBook = new Book(title,author,pages);
+    const {title,author,pages,read} = getInput();
+    let newBook = new Book(title,author,pages,read);
     if (isDuplicated(myLibrary,newBook)) {
         alert(" book already exists");
         return;
@@ -26,7 +26,8 @@ function getInput(){
     let title = document.querySelector(".add_title").value;
     let author = document.querySelector(".add_author").value;
     let pages = document.querySelector(".add_pages").value;
-    return {"title": title,"author": author,"pages":pages}
+    let read = document.querySelector(".add_read").value;
+    return {"title": title,"author": author,"pages":pages, "read": read}
 }
 
 function getDOM(){
@@ -34,7 +35,7 @@ function getDOM(){
         title: document.querySelector('.add_title'),
         author: document.querySelector('.add_author'),
         pages: document.querySelector('.add_pages'),
-        read: document.querySelector('.RStatus'),
+        read: document.querySelector('.add_read'),
         click: document.querySelector('.click_to_add'),
         removeBtn: document.querySelector('.removeBtn'),
         inputs: document.querySelector('.inputs'),
@@ -56,7 +57,8 @@ function refresh(){
         let status = (read == "1" ? "Read" : "Not Read")
         
     let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div></div>`;
-        box.insertAdjacentHTML('beforeend', html);
+    box.insertAdjacentHTML('beforeend', html);
+    statusColor();
     })
 }
 
@@ -74,19 +76,28 @@ function changeStatus(index){
         myLibrary[index].read = 2;
         chng.classList.remove('readed')
     }
-    //console.log(myLibrary[index]);
-    
     refresh();
 }
 
 function Appear(){
-    const {title, author, pages, click,add} = getDOM();
+    const {title, author, pages, click,read,add} = getDOM();
     title.classList.add('appear');
     author.classList.add('appear');
     pages.classList.add('appear');
     click.classList.add('dissapear');
     add.classList.add('appear');
+    read.classList.add('appear');
 }
 
-document.querySelector('.add_to_library').addEventListener('click', addBookToLibrary)
-document.querySelector('.click_to_add').addEventListener('click', Appear)
+function statusColor(){
+    const {statusBtn} = getDOM();
+    if(statusBtn.value === "Read"){
+        statusBtn.classList.add('read');
+    }else if (statusBtn.value === "Not Read"){
+        statusBtn.classList.add('not_read')
+    }
+}
+
+document.querySelector('.add_to_library').addEventListener('click', addBookToLibrary);
+document.querySelector('.click_to_add').addEventListener('click', Appear);
+document.querySelector('.statusBtn').addEventListener('click', statusColor);

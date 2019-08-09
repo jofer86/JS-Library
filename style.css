@@ -91,3 +91,11 @@
     border-radius: 6px;
     transition: all .5s ease;
 }
+
+.read{
+    background-color: green;
+}
+
+.not_read{
+    background-color: red;
+}
