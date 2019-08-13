@@ -1,4 +1,8 @@
-let myLibrary = [];
+const myLibrary = [
+    new Book('book 1','author 1',145,"1"),
+    new Book('book 2','author 2',145,"2"),
+    new Book('book 3','author 3',145,"1")
+];
 
 function Book (title, author, pages, read){
     this.title = title;
@@ -7,13 +11,22 @@ function Book (title, author, pages, read){
     this.read = read;
 }
 
+Book.prototype.toggleRead = (index) => {
+    
+    if (myLibrary[index].read == "2"){
+        myLibrary[index].read = "1";
+    } else {
+        myLibrary[index].read = "2";
+    }    
+}
+
 function isDuplicated(hole,part){
     return hole.some((e)=>e.title==part.title && e.author ==part.author && e.pages == part.pages && e.read == part.read)
 }
 
 function addBookToLibrary (){
     const {title,author,pages,read} = getInput();
-    let newBook = new Book(title,author,pages,read);
+    const newBook = new Book(title,author,pages,read);
     if (isDuplicated(myLibrary,newBook)) {
         alert(" book already exists");
         return;
@@ -23,10 +36,10 @@ function addBookToLibrary (){
 }
 
 function getInput(){
-    let title = document.querySelector(".add_title").value;
-    let author = document.querySelector(".add_author").value;
-    let pages = document.querySelector(".add_pages").value;
-    let read = document.querySelector(".add_read").value;
+    const title = document.querySelector(".add_title").value;
+    const author = document.querySelector(".add_author").value;
+    const pages = document.querySelector(".add_pages").value;
+    const read = document.querySelector(".add_read").value;
     return {"title": title,"author": author,"pages":pages, "read": read}
 }
 
@@ -45,25 +58,21 @@ function getDOM(){
 }
 
 function refresh(){
-    let lib = document.querySelector(".library");
-    let main = document.querySelector(".main")
-    let libHTML = '<section class="library"></div>';
+    const lib = document.querySelector(".library");
+    const main = document.querySelector(".main")
+    const libHTML = '<section class="library"></div>';
     lib.remove();
     main.insertAdjacentHTML('beforeend', libHTML);
 
     return myLibrary.forEach(function (book, i){
         const {title, author, pages, read} = book;
-        let box = document.querySelector(".library");
-        let status = (read == "1" ? "Read" : "Not Read")
-        let html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn" onclick="changeStatus(${i})">${status}</button></div></div>`;
+        const box = document.querySelector(".library");
+        const status = (read == "1" ? "Read" : "Not Read")
+        const stBtn = (read == "1" ? "read" : "not_read")
+        const html = `<div class ="book"><div class="leftB"><span class="title">Title: ${title} </span> <span class="author"> Author: ${author} </span> <span class="pages"> Pages Count: ${pages} </span> </div><div class="rightB"><button class="removeBtn" onclick="removeBook(${i})">Remove Book</button><button class="statusBtn ${stBtn}" onclick="changeStatus(${i})">${status}</button></div></div>`;
         box.insertAdjacentHTML('beforeend', html);
-        let chng = document.querySelectorAll(".statusBtn")[i];
-        if(chng.innerHTML == 'Read'){
-            chng.classList.add('read')
-        }else{
-        chng.classList.add('not_read')
-        }
-})
+        
+});
 }
 
 
@@ -73,19 +82,9 @@ function removeBook(index){
     }
     
 function changeStatus(index){
-    let chng = document.querySelectorAll(".statusBtn")[index];     
-        
-    if (myLibrary[index].read == "2"){
-        myLibrary[index].read = "1";
-        chng.classList.remove('not_read');
-        chng.classList.add('read');
-        chng.innerHTML = 'Read'
-    } else {
-        myLibrary[index].read = "2";
-        chng.classList.remove('read');
-        chng.classList.add('not_read');
-        chng.innerHTML = "Not Read"
-    }    
+    const {statusBtn: chng} = getDOM();     
+    myLibrary[index].toggleRead(index);    
+    refresh();
 }
 
 function Appear(){
@@ -102,7 +101,7 @@ function Appear(){
 
 document.querySelector('.add_to_library').addEventListener('click', addBookToLibrary);
 document.querySelector('.click_to_add').addEventListener('click', Appear);
-
+window.addEventListener('load',refresh);
 
 
 
