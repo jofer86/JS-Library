@@ -1,0 +1,104 @@
+.add_title,
+.add_author,
+.add_pages,
+.add_read,
+.RStatus, 
+.add_to_library{
+    display: none;
+}
+
+.appear{
+    display: inline-block;
+}
+
+.dissapear {
+    display: none;
+}
+
+.statusBtn {
+    
+    transition: all .5s ease-in;
+}
+
+.readed {
+    background-color: rgb(12, 50, 163);
+}
+
+.add_book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    background-color: aquamarine;
+    border-radius: 10px;
+}
+
+.click_to_add,
+.add_to_library {
+    height: 40px;
+    border-radius: 8px;
+    color: white;
+    background-color: blueviolet;
+    box-shadow: 5px 5px 5px 0px rgb(94, 92, 92);
+}
+
+.add_title,
+.add_author,
+.add_pages {
+    height: 35px;
+    border-radius: 8px;   
+}
+
+.library {
+    margin: .5rem 0;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+
+.book {
+    background-color: rgb(223, 183, 122);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 2px rgb(139, 218, 200);
+    padding: .5rem;
+    height: 200px;
+    width: 30vw;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    
+}
+
+.book > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+.leftB {
+    align-items: flex-start;
+}
+
+.rightB > button {
+    align-items: center;
+    width: 80px;
+    color: beige;
+    border-radius: 6px;
+    transition: all .5s ease;
+}
+
+.read{
+    background-color: green;
+}
+
+.not_read{
+    background-color: red;
+}
+
+.removeBtn{
+    background-color: orangered;
+}
